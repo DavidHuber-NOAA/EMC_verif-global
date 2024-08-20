@@ -90,6 +90,7 @@ status=$?
 [[ $status -eq 0 ]] && echo "Succesfully loaded modules"
 echo
 
+set -u
 ## Set paths for verif_global, MET, and METplus
 export HOMEverif_global=$HOMEverif_global
 export PARMverif_global=$HOMEverif_global/parm
@@ -102,6 +103,7 @@ export PARMMETplus=$HOMEMETplus/parm
 export USHMETplus=$HOMEMETplus/ush
 export PATH="${USHMETplus}:${PATH}"
 export PYTHONPATH="${USHMETplus}:${PYTHONPATH}"
+set +u
 
 ## Set machine specific fix directory
 if [ $machine = "WCOSS2" ]; then
@@ -126,7 +128,7 @@ if [ $machine = "WCOSS2" ]; then
     export nproc="128"
     export MPMD="YES"
 elif [ $machine = "HERA" ]; then
-    export ACCOUNT="fv3-cpu"
+    export ACCOUNT="nems"
     export QUEUE="batch"
     export QUEUESHARED="batch"
     export QUEUESERV="service"

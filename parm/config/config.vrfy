@@ -33,7 +33,7 @@ export RUN_GRID2GRID_STEP1="YES"
 export RUN_GRID2GRID_STEP2="NO"
 export RUN_GRID2OBS_STEP1="YES"
 export RUN_GRID2OBS_STEP2="NO"
-export RUN_PRECIP_STEP1="YES"
+export RUN_PRECIP_STEP1="NO"
 export RUN_PRECIP_STEP2="NO"
 export RUN_SATELLITE_STEP1="NO"
 export RUN_SATELLITE_STEP2="NO"
@@ -53,16 +53,16 @@ export RUN_MAPSDA="NO"
 #model_hpss_dir_list:    HPSS directory of data
 #model_data_run_hpss:    get files from HPSS ("YES") if not online
 #hpss_walltime:          how long to run HPSS job to get data in minutes
-export model_list="gfs"
-export model_dir_list="/lfs/h2/emc/vpppg/noscrub/emc.vpppg/verification/global/archive/model_data"
-export model_stat_dir_list="/lfs/h2/emc/vpppg/noscrub/$USER/archive"
-export model_file_format_list="pgbf{lead?fmt=%2H}.gfs.{init?fmt=%Y%m%d%H}"
+export model_list="comp_gcp_384"
+export model_dir_list="/scratch1/NESDIS/nesdis-rdo2/David.Huber/archive"
+export model_stat_dir_list="/scratch1/NCEPDEV/global/David.Huber/archive/model_data"
+export model_file_format_list="pgbf{lead?fmt=%2H}.gfs.{init?fmt=%Y%m%d%H}.grib2"
 export model_data_run_hpss="NO"
 export model_hpss_dir_list="/NCEPPROD/hpssprod/runhistory"
 export hpss_walltime="10"
 ## OUTPUT DATA SETTINGS
 #OUTPUTROOT: base output directory
-export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone"
+export OUTPUTROOT="/scratch1/NCEPDEV/global/David.Huber/para/stmp/verif_standalone"
 ## DATE SETTINGS
 #start_date:          verification start date, format YYYYMMDD
 #end_date:            verification end date, format YYYYMMDD
@@ -70,8 +70,8 @@ export OUTPUTROOT="/lfs/h2/emc/stmp/$USER/verif_global_standalone"
 #spinup_period_end:   spinup period end, format YYYYMMDDHH, if none use "NA"
 #make_met_data_by:    how to treat dates, "VALID" or "INIT"
 #plot_by:             how to plot data, "VALID" or "INIT"
-export start_date=$(date -d "24 hours ago" '+%Y%m%d')
-export end_date=$(date -d "24 hours ago" '+%Y%m%d')
+export start_date=20220401 
+export end_date=20220405
 export spinup_period_start="NA"
 export spinup_period_end="NA"
 export make_met_data_by="VALID"
@@ -131,7 +131,7 @@ if [ $RUN_GRID2GRID_STEP1 = YES ]; then
     #g2g1_mv_database_desc: description of database, can be blank
     export g2g1_type_list="anom pres sfc"
     export g2g1_anom_truth_name="self_anl"
-    export g2g1_anom_truth_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}"
+    export g2g1_anom_truth_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}.grib2"
     export g2g1_anom_fcyc_list="00"
     export g2g1_anom_vhr_list="00"
     export g2g1_anom_fhr_min="00"
@@ -139,7 +139,7 @@ if [ $RUN_GRID2GRID_STEP1 = YES ]; then
     export g2g1_anom_grid="G002"
     export g2g1_anom_gather_by="VSDB"
     export g2g1_pres_truth_name="self_anl"
-    export g2g1_pres_truth_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}"
+    export g2g1_pres_truth_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}.grib2"
     export g2g1_pres_fcyc_list="00"
     export g2g1_pres_vhr_list="00"
     export g2g1_pres_fhr_min="00"
@@ -147,7 +147,7 @@ if [ $RUN_GRID2GRID_STEP1 = YES ]; then
     export g2g1_pres_grid="G002"
     export g2g1_pres_gather_by="VSDB"
     export g2g1_sfc_truth_name="self_f00"
-    export g2g1_sfc_truth_file_format_list="pgbf00.gfs.{valid?fmt=%Y%m%d%H}"
+    export g2g1_sfc_truth_file_format_list="pgbf00.gfs.{valid?fmt=%Y%m%d%H}.grib2"
     export g2g1_sfc_fcyc_list="00"
     export g2g1_sfc_vhr_list="00"
     export g2g1_sfc_fhr_min="00"
@@ -174,7 +174,7 @@ if [ $RUN_GRID2GRID_STEP2 = YES ]; then
     #####    g2g2_[type]_event_eq:        do event equalization (True) or not (False)
     #####    g2g2_[type]_grid:            NCEP grid verification was done on
     #g2g2_make_scorecard: create scorecard (YES) or not (NO)
-    export g2g2_model_plot_name_list="ops_gfs"
+    export g2g2_model_plot_name_list="comp_gcp"
     export g2g2_type_list="anom pres sfc"
     export g2g2_anom_truth_name_list="self_anl"
     export g2g2_anom_gather_by_list="VSDB"
@@ -261,7 +261,7 @@ if [ $RUN_GRID2OBS_STEP2 = YES ]; then
     #####    g2o2_[type]_fhr_max:          forecast hour to end verification HH[H]
     #####    g2o2_[type]_event_eq:         do event equalization (True) or not (False)
     #####    g2o2_[type]_grid:             NCEP grid verification was done on
-    export g2o2_model_plot_name_list="ops_gfs"
+    export g2o2_model_plot_name_list="comp_gcp"
     export g2o2_type_list="upper_air conus_sfc"
     export g2o2_upper_air_msg_type_list="ADPUPA"
     export g2o2_upper_air_gather_by_list="VSDB"
@@ -308,7 +308,7 @@ if [ $RUN_PRECIP_STEP1 = YES ]; then
     export precip1_type_list="ccpa_accum24hr"
     export precip1_ccpa_accum24hr_model_bucket_list="06"
     export precip1_ccpa_accum24hr_model_var_list="APCP"
-    export precip1_ccpa_accum24hr_model_file_format_list="pgbf{lead?fmt=%2H}.gfs.{init?fmt=%Y%m%d%H}"
+    export precip1_ccpa_accum24hr_model_file_format_list="pgbf{lead?fmt=%2H}.gfs.{init?fmt=%Y%m%d%H}.grib2"
     export precip1_ccpa_accum24hr_fcyc_list="00"
     export precip1_ccpa_accum24hr_fhr_min="00"
     export precip1_ccpa_accum24hr_fhr_max="180"
@@ -330,7 +330,7 @@ if [ $RUN_PRECIP_STEP2 = YES ]; then
     #####    precip2_[type]_fhr_max:        forecast hour to end verification HH[H]
     #####    precip2_[type]_event_eq:       do event equalization (True) or not (False)
     #####    precip2_[type]_grid:           NCEP grid verification was done on
-    export precip2_model_plot_name_list="ops_gfs"
+    export precip2_model_plot_name_list="comp_gcp"
     export precip2_type_list="ccpa_accum24hr"
     export precip2_ccpa_accum24hr_gather_by_list="VSDB"
     export precip2_ccpa_accum24hr_fcyc_list="00"
@@ -381,7 +381,7 @@ if [ $RUN_SATELLITE_STEP2 = YES ]; then
     #####    sat2_[type]_sea_ice_thresh:       threshold for sea ice, anything >= considered ice, anything below no ice
     #####    sat2_[type]_event_eq:             do event equalization (True) or not (False)
     #####    sat2_[type]_grid:                 NCEP grid verification was done on
-    export sat2_model_plot_name_list="ops_gfs"
+    export sat2_model_plot_name_list="cps_gfs"
     export sat2_type_list="ghrsst_ncei_avhrr_anl"
     export sat2_ghrsst_ncei_avhrr_anl_gather_by_list="VSDB"
     export sat2_ghrsst_ncei_avhrr_anl_fcyc_list="00"
@@ -467,10 +467,10 @@ if [ $RUN_MAPS2D = YES ]; then
     #maps2d_model2model_forecast_anl_diff: plot the difference of model forecast from an analysis (YES) or don't (NO)
     #maps2d_model2obs_use_ceres: use CERES data for cloud and radiation obs. (YES) or use ISCCP, SRB, NVAP, UWisc for cloud and radiation obs. (NO)
     #maps2d_model2obs_use_monthly_mean: use monthly mean from datasets, if available (YES) or use climatology generated from datasets (NO)
-    export maps2d_model_plot_name_list="ops_gfs"
+    export maps2d_model_plot_name_list="comp_gcp"
     export maps2d_latlon_area="-90 90 0 360"
     export maps2d_plot_diff="YES"
-    export maps2d_anl_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}"
+    export maps2d_anl_file_format_list="pgbanl.gfs.{valid?fmt=%Y%m%d%H}.grib2"
     export maps2d_type_list="model2model model2obs"
     export maps2d_model2model_make_met_data_by="INIT"
     export maps2d_model2model_hour_list="00"
