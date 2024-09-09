@@ -25,6 +25,7 @@ else
 fi
 
 ## Load
+set -u
 if [ $machine = WCOSS2 ]; then
     source /usr/share/lmod/lmod/init/sh
     module reset
@@ -33,14 +34,14 @@ if [ $machine = WCOSS2 ]; then
     module use ${HOMEverif_global}/modulefiles
     module load emc_verif_global_wcoss2
     if [ $MET_version = 9.1 ]; then
-        export HOMEMET="$MET_ROOT"
+        export HOMEMET="${MET_ROOT:-${met_ROOT}}"
         export HOMEMET_bin_exec="bin"
     else
         "ERROR: $MET_version is not supported on $machine"
         exit 1
     fi
     if [ $METplus_version = 3.1 ]; then
-        export HOMEMETplus="${METPLUS_PATH}"
+        export HOMEMETplus="${METPLUS_PATH:-${metplus_ROOT}}"
     else
         "ERROR: $METplus_version is not supported on $machine"
         exit 1
@@ -51,14 +52,14 @@ elif [ $machine = HERA ]; then
     module use ${HOMEverif_global}/modulefiles
     module load emc_verif_global_hera
     if [ $MET_version = 9.1 ]; then
-        export HOMEMET="/contrib/met/9.1"
+        export HOMEMET="${MET_ROOT:-${met_ROOT}}"
         export HOMEMET_bin_exec="bin"
     else
         "ERROR: $MET_version is not supported on $machine"
         exit 1
     fi
     if [ $METplus_version = 3.1 ]; then
-        export HOMEMETplus="${METPLUS_PATH}"
+        export HOMEMETplus="${METPLUS_PATH:-${metplus_ROOT}}"
     else
         "ERROR: $METplus_version is not supported on $machine"
         exit 1
@@ -124,6 +125,7 @@ else
     echo "ERROR: $machine is not supported"
     exit 1
 fi
+set +u
 if [ $machine != "ORION" ]; then
     export RM=$(which rm)
     export CUT=$(which cut)

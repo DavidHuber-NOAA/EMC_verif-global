@@ -30,11 +30,11 @@ echo "BEGIN: $(basename ${BASH_SOURCE[0]})"
 #RUN_MAPS2D:          run to make forecast maps including lat-lon and zonal-mean distributions
 #RUN_MAPSDA:          run to make analysis maps of time-mean increments, ENKF ensemble mean and ensemble spread
 export RUN_GRID2GRID_STEP1="NO"
-export RUN_GRID2GRID_STEP2="YES"
+export RUN_GRID2GRID_STEP2="NO"
 export RUN_GRID2OBS_STEP1="NO"
-export RUN_GRID2OBS_STEP2="YES"
+export RUN_GRID2OBS_STEP2="NO"
 export RUN_PRECIP_STEP1="NO"
-export RUN_PRECIP_STEP2="NO"
+export RUN_PRECIP_STEP2="YES"
 export RUN_SATELLITE_STEP1="NO"
 export RUN_SATELLITE_STEP2="NO"
 export RUN_FIT2OBS_PLOTS="NO"
@@ -62,7 +62,7 @@ export model_hpss_dir_list="/NCEPPROD/hpssprod/runhistory"
 export hpss_walltime="10"
 ## OUTPUT DATA SETTINGS
 #OUTPUTROOT: base output directory
-export OUTPUTROOT="/scratch1/NCEPDEV/global/David.Huber/para/stmp/verif_standalone"
+export OUTPUTROOT="/scratch1/NCEPDEV/global/David.Huber/para/stmp/verif_standalone_precip"
 ## DATE SETTINGS
 #start_date:          verification start date, format YYYYMMDD
 #end_date:            verification end date, format YYYYMMDD
@@ -70,7 +70,7 @@ export OUTPUTROOT="/scratch1/NCEPDEV/global/David.Huber/para/stmp/verif_standalo
 #spinup_period_end:   spinup period end, format YYYYMMDDHH, if none use "NA"
 #make_met_data_by:    how to treat dates, "VALID" or "INIT"
 #plot_by:             how to plot data, "VALID" or "INIT"
-export start_date=20220401 
+export start_date=20220402
 export end_date=20220404
 export spinup_period_start="NA"
 export spinup_period_end="NA"
