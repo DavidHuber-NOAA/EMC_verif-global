@@ -293,7 +293,7 @@ def create_job_script(
     if machine_name == "WCOSS2":
         sh.write(f"source ${{HOMEverif_global}}/versions/run.ver\n")
     if machine_name in ["URSA", "HERCULES"]:
-        sh.write("module purge\n")
+        sh.write("module reset && module purge\n")
     else:
         sh.write("module reset\n")
     sh.write(f"module use \"${{HOMEverif_global}}/modulefiles\"\n")
