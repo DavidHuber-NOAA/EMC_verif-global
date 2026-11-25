@@ -466,7 +466,7 @@ maps2d_model2obs_forecast_to_plot_list=anl d1 d5 d10
 maps2d_model2obs_regrid_to_grid=G002
 maps2d_model2obs_use_ceres=NO
 maps2d_model2obs_use_monthly_mean=NO
-maps2d_model2obs_used_fixed_levels=YES
+maps2d_model2obs_use_fixed_levels=YES
 
 [MAPSDA]
 #mapsda_model_plot_name_list: list of models reference name on plots
